@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin:'application'
+apply plugin: 'jacoco'
+
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+mainClassName = "main.PeakTraffic"
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'main.PeakTraffic'
+    }
+}
+
+jacoco {
+    toolVersion = "0.7.1.201405082137"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
